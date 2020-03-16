@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { FormLabel, Input, Button } from "@material-ui/core";
-import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 class form extends Component {
   constructor(props) {
@@ -13,17 +13,12 @@ class form extends Component {
       email: ""
     };
 
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.firstNamehandleChange = this.firstNamehandleChange.bind(this);
     this.lastNamehandleChange = this.lastNamehandleChange.bind(this);
     this.addresshandleChange = this.addresshandleChange.bind(this);
     this.emailhandleChange = this.emailhandleChange.bind(this);
     this.phonehandleChange = this.phonehandleChange.bind(this);
-  }
-
-  handleChange(event) {
-    this.setState({ value: event.target.value });
   }
 
   firstNamehandleChange(event) {
@@ -48,14 +43,9 @@ class form extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.cb(
-      this.state.first_name,
-      this.state.last_name,
-      this.state.address,
-      this.state.phone,
-      this.state.email,
-      1
-    );
+    const user = this.state;
+    console.log(user);
+    this.props.onAddUser(user);
     this.props.history.push("/sauce");
   }
 
@@ -128,4 +118,17 @@ class form extends Component {
   }
 }
 
-export default withRouter(form);
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddUser: user => dispatch({ type: "ADD_USER", payload: { user: user } })
+    // onDeccrementCounter: () =>
+    //   dispatch({ type: DECREMENT, payload: { value: 1 } }),
+    // onAddCounter: () => dispatch({ type: "ADD", payload: { value: 5 } }),
+    // onSubractCounter: () => dispatch({ type: SUBTRACT, payload: { value: 5 } }),
+    // onAddCounterValue: () => dispatch({ type: ADD_VALUE }),
+    // onDeleteCounterValue: id =>
+    //   dispatch({ type: DELETE_VALUE, payload: { id: id } })
+  };
+};
+
+export default connect(null, mapDispatchToProps)(form);

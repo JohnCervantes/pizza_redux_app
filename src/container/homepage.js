@@ -8,36 +8,13 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 
-
-
-
-export default class homepage extends Component {
-
-  
+class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      step: 0,
-      first_name: "",
-      last_name: "",
-      address: "",
-      phone: "",
-      email: "",
-
-      sauceLevel: "",
-      crustType: "",
-
-      pepperoni: "",
-      pineapple: "",
-      spinach: "",
-      sausage: "",
-      bacon: "",
-      onion: "",
-      mushroom: ""
+      step: 0
     };
   }
-
- 
 
   nextStep = () => {
     const { step } = this.state;
@@ -54,49 +31,6 @@ export default class homepage extends Component {
       "Review your order"
     ];
   }
-
-  formCallBack = (first_name, last_name, address, phone, email, step) => {
-    this.setState({
-      first_name: first_name,
-      last_name: last_name,
-      address: address,
-      phone: phone,
-      email: email,
-      step: step
-    });
-  };
-
-
-
-
-  sauceAndToppingsCallBack = (sauceLevel, crustType, step) => {
-    this.setState({ sauceLevel: sauceLevel, crustType: crustType, step: step });
-  };
-
-  additionalToppingsCallBack = (
-    pepperoni,
-    pineapple,
-    spinach,
-    sausage,
-    bacon,
-    onion,
-    mushroom,
-    step
-  ) => {
-    this.setState({
-      pepperoni: pepperoni,
-      pineapple: pineapple,
-      spinach: spinach,
-      sausage: sausage,
-      bacon: bacon,
-      onion: onion,
-      mushroom: mushroom,
-      step: step
-    });
-  };
-
-
-  
 
   render() {
     const steps = this.getSteps();
@@ -122,26 +56,18 @@ export default class homepage extends Component {
         </Stepper>
         <Router>
           <Switch>
-            <Route
-              exact
-              path="/"
-              render={() => <Form cb={this.formCallBack} />}
-            ></Route>
-            <Route
-              path="/sauce"
-              render={() => <Sauce cb={this.sauceAndToppingsCallBack} />}
-            ></Route>
+            <Route exact path="/" render={props => <Form {...props} />} />
+            <Route path="/sauce" render={props => <Sauce {...props} />} />
             <Route
               path="/toppings"
-              render={() => <Toppings cb={this.additionalToppingsCallBack} />}
+              render={props => <Toppings {...props} />}
             ></Route>
-            <Route
-              path="/final"
-              render={() => <Final data={this.state} />}
-            ></Route>
+            <Route path="/final" component={Final} />
           </Switch>
         </Router>
       </div>
     );
   }
 }
+
+export default Homepage;

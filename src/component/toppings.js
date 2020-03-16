@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { TextField, MenuItem, Button, FormLabel } from "@material-ui/core";
-import { withRouter } from "react-router-dom";
-
+import { connect } from "react-redux";
 
 class toppings extends Component {
   constructor(props) {
@@ -15,6 +14,7 @@ class toppings extends Component {
       onion: "",
       mushroom: ""
     };
+
     this.mushroomhandleChange = this.mushroomhandleChange.bind(this);
     this.onionhandleChange = this.onionhandleChange.bind(this);
     this.baconhandleChange = this.baconhandleChange.bind(this);
@@ -55,16 +55,8 @@ class toppings extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.cb(
-      this.state.pepperoni,
-      this.state.pineapple,
-      this.state.spinach,
-      this.state.sausage,
-      this.state.bacon,
-      this.state.onion,
-      this.state.mushroom,
-      3
-    );
+    const toppings = this.state;
+    this.props.onAddToppings(toppings);
     this.props.history.push("/final");
   }
 
@@ -239,4 +231,17 @@ class toppings extends Component {
   }
 }
 
-export default withRouter(toppings);
+const mapStateToProps = state => {
+  return { user: state.user.user };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddToppings: toppings =>
+      dispatch({
+        type: "ADD_TOPPINGS",
+        payload: { toppings: toppings }
+      })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(toppings);

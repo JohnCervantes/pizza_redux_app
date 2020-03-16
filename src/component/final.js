@@ -4,6 +4,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import "../App.css";
+import { connect } from "react-redux";
 
 const final = props => {
   let {
@@ -14,14 +15,18 @@ const final = props => {
     bacon,
     onion,
     mushroom
-  } = props.data;
+  } = props.toppings;
+
+  let { first_name, last_name, address, phone, email } = props.user;
+  let { sauceLevel, crustType } = props.sauceAndCrust;
+
   pepperoni = pepperoni ? `Pepperoni: ${pepperoni}, ` : undefined;
   pineapple = pineapple ? `Pineapple: ${pineapple}, ` : undefined;
   spinach = spinach ? `Spinach: ${spinach}, ` : undefined;
   sausage = sausage ? `Sausage: ${sausage}, ` : undefined;
   bacon = bacon ? `Bacon: ${bacon}, ` : undefined;
   onion = onion ? `Onion: ${onion}, ` : undefined;
-  mushroom = mushroom ? `Mushroom: ${mushroom}, ` : undefined;
+  mushroom = mushroom ? `Mushroom: ${mushroom} ` : undefined;
 
   return (
     <div>
@@ -36,21 +41,15 @@ const final = props => {
           <Typography variant="body2" color="primary" component="p">
             <hr></hr>
             <h3>Your info:</h3>
-            <p>First name: {props.data.first_name}</p>
-            <p>Last name: {props.data.last_name}</p>
-            <p>Address: {props.data.address}</p>
-            <p>Phone number: {props.data.phone}</p>
-            <p>Email Address: {props.data.email}</p>
+            <p>First name: {first_name}</p>
+            <p>Last name: {last_name}</p>
+            <p>Address: {address}</p>
+            <p>Phone number: {phone}</p>
+            <p>Email Address: {email}</p>
             <hr></hr>
             <h3>Sauce level and crust type</h3>
-            <p>
-              Sauce level:{" "}
-              {props.data.sauceLevel ? props.data.sauceLevel : "Regular"}
-            </p>
-            <p>
-              Crust type:{" "}
-              {props.data.crustType ? props.data.crustType : "Regular"}
-            </p>
+            <p>Sauce level: {sauceLevel ? sauceLevel : "Regular"}</p>
+            <p>Crust type: {crustType ? crustType : "Regular"}</p>
             <hr></hr>
             <h3>Additional toppings:</h3>
             <p>
@@ -69,4 +68,12 @@ const final = props => {
   );
 };
 
-export default final;
+const mapStateToProps = state => {
+  return {
+    user: state.user.user,
+    sauceAndCrust: state.ingredients.sauceAndCrust,
+    toppings: state.ingredients.toppings
+  };
+};
+
+export default connect(mapStateToProps, null)(final);

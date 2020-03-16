@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { TextField, MenuItem, Button, FormLabel } from "@material-ui/core";
-import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 
 class sauce extends Component {
   constructor(props) {
@@ -24,7 +24,8 @@ class sauce extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.cb(this.state.sauceLevel, this.state.crustType,2);
+    const crustAndSauce = this.state;
+    this.props.onAddIngredients(crustAndSauce);
     this.props.history.push("/toppings");
   }
 
@@ -58,6 +59,9 @@ class sauce extends Component {
 
     return (
       <div>
+        <p>
+          hi {this.props.user.first_name} {this.props.user.last_name}
+        </p>
         <form onSubmit={this.handleSubmit}>
           <FormLabel style={{ fontWeight: "bold" }}>
             Sauce level: &nbsp;
@@ -107,4 +111,17 @@ class sauce extends Component {
   }
 }
 
-export default withRouter(sauce);
+const mapStateToProps = state => {
+  return { user: state.user.user };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    onAddIngredients: sauceAndCrust =>
+      dispatch({
+        type: "ADD_SAUCE_AND_CRUST",
+        payload: { sauceAndCrust: sauceAndCrust }
+      })
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(sauce);
