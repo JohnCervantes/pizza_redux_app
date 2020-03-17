@@ -1,3 +1,12 @@
+# Pizza_redux_app
+
+A pizzeria web application built using React, Redux and Material-UI
+
+Demo: https://youtu.be/G4Ywt_B0l34
+
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
