@@ -31,7 +31,7 @@ class Footer extends Component {
                   </span>
                 </li>
                 <li>
-                  A pizza store web application built using React and
+                  A pizzeria web application built using React, Redux and
                   Material-UI.
                 </li>
               </ul>

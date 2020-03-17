@@ -9,7 +9,7 @@ const header = () => {
       <AppBar position="static" >
         <Toolbar>
           <Typography variant="title" color="inherit">
-            Bad Seal Studios - Pizza application
+            Bad Seal Studios - Pizzeria application
           </Typography>
         </Toolbar>
       </AppBar>

@@ -1,27 +1,18 @@
 import React, { Component } from "react";
-import Form from "../component/form";
-import Sauce from "../component/sauce";
-import Toppings from "../component/toppings";
-import Final from "../component/final";
+import Form from "../components/UserInfo";
+import Sauce from "../components/SauceAndCrust";
+import Toppings from "../components/AdditionalToppings";
+import Final from "../components/ReviewOrder";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
+import { connect } from "react-redux";
 
 class Homepage extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      step: 0
-    };
   }
-
-  nextStep = () => {
-    const { step } = this.state;
-    this.setState({
-      step: step + 1
-    });
-  };
 
   getSteps() {
     return [
@@ -34,6 +25,7 @@ class Homepage extends Component {
 
   render() {
     const steps = this.getSteps();
+    console.log(this.props.counter);
 
     return (
       <div>
@@ -45,7 +37,7 @@ class Homepage extends Component {
             marginBottom: "100px",
             marginTop: "50px"
           }}
-          activeStep={this.state.step}
+          activeStep={this.props.counter}
           alternativeLabel
         >
           {steps.map(label => (
@@ -70,4 +62,10 @@ class Homepage extends Component {
   }
 }
 
-export default Homepage;
+const mapStateToProps = state => {
+  return {
+    counter: state.counter.counter
+  };
+};
+
+export default connect(mapStateToProps, null)(Homepage);

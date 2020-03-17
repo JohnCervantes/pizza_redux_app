@@ -15,12 +15,4 @@ const ingredientsReducer = (state = initialIngredientsState, action) => {
 
 export default ingredientsReducer;
 
-// sauceLevel: "",
-// crustType: "",
-// pepperoni: "",
-// pineapple: "",
-// spinach: "",
-// sausage: "",
-// bacon: "",
-// onion: "",
-// mushroom: ""
+

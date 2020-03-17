@@ -7,10 +7,12 @@ import { createStore, combineReducers } from "redux";
 import userReducer from "./store/reducers/userReducer";
 import ingredientsReducer from "./store/reducers/ingredientsReducer";
 import { Provider } from "react-redux";
+import counterReducer from "./store/reducers/counterReducer";
 
 const rootReducer = combineReducers({
   user: userReducer,
-  ingredients : ingredientsReducer
+  ingredients: ingredientsReducer,
+  counter: counterReducer
 });
 
 const store = createStore(rootReducer);

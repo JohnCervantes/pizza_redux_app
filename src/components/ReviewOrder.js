@@ -30,15 +30,17 @@ const final = props => {
 
   return (
     <div>
-      <Card style={{ margin: "auto", width: "50%" }}>
+      <Card
+        style={{ margin: "auto", width: "50%", backgroundColor: "#F8F8F8" }}
+      >
         <CardMedia>
           <img src={require("../assets/piazza.jpeg")} alt="Delicious pizza" />
+          <Typography gutterBottom variant="h5">
+            <strong>Review your order:</strong>
+          </Typography>
         </CardMedia>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Review your order:
-          </Typography>
-          <Typography variant="body2" color="primary" component="p">
+          <Typography variant="body2" color="primary">
             <hr></hr>
             <h3>Your info:</h3>
             <p>First name: {first_name}</p>
